@@ -21,10 +21,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Ensure build dir exists
-        run: mkdir -p build
-
-      - name: Convert Markdown into PDF
+      - name: Convert Markdown into PDF/HTML
         uses: KoharaKazuya/marp-cli-action@v4
         with:
           config-file: docs/.marprc-ci.yml
@@ -35,7 +32,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: ./build/
+          source-dir: ./docs/build/
           preview-branch: gh-pages
           umbrella-dir: pr-preview
 
@@ -44,6 +41,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: ./build/
+          folder: ./docs/build/
           clean-exclude: pr-preview/
 
