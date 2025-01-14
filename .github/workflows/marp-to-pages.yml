@@ -25,7 +25,7 @@ jobs:
         run: mkdir -p build
 
       - name: Convert Markdown into PDF
-        uses: KoharaKazuya/marp-cli-action@v2
+        uses: KoharaKazuya/marp-cli-action@v4
         with:
           config-file: docs/marprc-ci.yml
           generate-html: true
