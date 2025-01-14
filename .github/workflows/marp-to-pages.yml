@@ -27,7 +27,6 @@ jobs:
       - name: Copy images directory (if exists)
         run: if [[ -d img ]]; then cp -R img build/img; fi
 
-
       - name: Check if docs folder exists
         id: docs-folder-exists
         run: bash -c "[[ -d docs ]] ; echo \"has_docs=\$?\" >> \"$GITHUB_OUTPUT\""
@@ -36,7 +35,7 @@ jobs:
         if: steps.docs-folder-exists.outputs.has_docs == '0'
         uses: docker://marpteam/marp-cli:v4.0.4
         with:
-          args: -I docs/ -o build/docs/
+          args: -I docs/ -o build/
         env:
           MARP_USER: root:root
 
