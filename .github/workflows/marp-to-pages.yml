@@ -24,28 +24,12 @@ jobs:
       - name: Ensure build dir exists
         run: mkdir -p build
 
-      - name: Copy images directory (if exists)
-        run: if [[ -d img ]]; then cp -R img build/img; fi
-
-      - name: Check if docs folder exists
-        id: docs-folder-exists
-        run: bash -c "[[ -d docs ]] ; echo \"has_docs=\$?\" >> \"$GITHUB_OUTPUT\""
-
-      - name: Marp Build (docs folder, if exists) to html
-        if: steps.docs-folder-exists.outputs.has_docs == '0'
-        uses: docker://marpteam/marp-cli:v4.0.4
+      - name: Convert Markdown into PDF
+        uses: KoharaKazuya/marp-cli-action@v2
         with:
-          args: -I docs/ -o build/
-        env:
-          MARP_USER: root:root
-
-      - name: Marp Build (docs folder, if exists) to pdf
-        if: steps.docs-folder-exists.outputs.has_docs == '0'
-        uses: docker://marpteam/marp-cli:v4.0.4
-        with:
-          args: -I docs/ -o build/ --pdf
-        env:
-          MARP_USER: root:root
+          config-file: docs/marprc-ci.yml
+          generate-html: true
+          generate-pdf: true
 
       - name: Deploy preview
         if: ${{ github.event_name == 'pull_request' }}
