@@ -28,7 +28,7 @@ jobs:
         run: if [[ -d img ]]; then cp -R img build/img; fi
 
       - name: Marp Build (README)
-        uses: docker://marpteam/marp-cli:v3.0.2
+        uses: docker://marpteam/marp-cli:v4.0.4
         with:
           args: README.md -o build/index.html
         env:
@@ -42,7 +42,7 @@ jobs:
           MARP_USER: root:root
 
       - name: Marp Build (README.pptx)
-        uses: docker://marpteam/marp-cli:v3.0.2
+        uses: docker://marpteam/marp-cli:v4.0.4
         with:
           args: README.md --allow-local-files -o build/README.pptx
         env:
