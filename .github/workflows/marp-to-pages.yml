@@ -27,7 +27,7 @@ jobs:
       - name: Convert Markdown into PDF
         uses: KoharaKazuya/marp-cli-action@v4
         with:
-          config-file: docs/marprc-ci.yml
+          config-file: docs/.marprc-ci.yml
           generate-html: true
           generate-pdf: true
 
